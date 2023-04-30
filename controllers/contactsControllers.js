@@ -14,11 +14,17 @@ const addContactCtrl = async (req, res) => {
 };
 
 const deleteContactCtrl = async (req, res) => {
-  res.json(await deleteContact(req.body));
+  const { contactId } = req.params;
+  await deleteContact(contactId);
+  res.status(204).json();
 };
 
 const updateContactCtrl = async (req, res) => {
-  res.json(await updateContact(req.body));
+  const { contactId } = req.params;
+  const { name, number } = req.body;
+  const user = await updateContact(contactId, { name, number });
+  console.log(user);
+  await res.status(200).json(user);
 };
 
 module.exports = {

@@ -8,11 +8,17 @@ const getAll = async () => {
 const addContact = async (data) => {
   const contact = new Contact(data);
   await contact.save();
+  return contact;
 };
 
-const deleteContact = async (data) => {};
+const deleteContact = async (id, data) => {
+  await Contact.findByIdAndDelete(id, data);
+};
 
-const updateContact = async () => {};
+const updateContact = async (fields, data) => {
+  const contact = await Contact.findByIdAndUpdate(fields, data, { new: true });
+  return contact;
+};
 
 module.exports = {
   getAll,

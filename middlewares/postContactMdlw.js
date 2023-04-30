@@ -8,7 +8,6 @@ const addContactSchema = Joi.object({
 
 const validateAddContact = (req, __, next) => {
   const { error } = addContactSchema.validate(req.body);
-  console.log(error);
   if (error) {
     return next(httpError(400, error.message));
   }
